@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-lg">
+  <a class="navbar-brand"[routerLink]="['/StartPage']" >Test Generator</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" [routerLink]="['/StartPage']" i18n>Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/AddQuestion']" i18n>Add Question</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/PreviewQuestion']" i18n>Preview Question</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/GenerateTest']" i18n>Generate Test</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/PreviewTests']" i18n>Preview Tests</a>
+      </li>
+      <ng-container *ngIf="admin==true || systemAdmin==true">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/AdminPanel']" i18n>Admin Panel</a>
+        </li>
+      </ng-container>
+      <ng-container *ngIf="systemAdmin==true">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/systemAdminPanel']" i18n>System Admin Panel</a>
+          </li>
+        </ng-container>
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li class="nav-item userHeader">
+          <i class="far fa-user"></i>
+            {{name}}
+        </li>
+      <a href="#">
+        <button class="btn" (click)="logOut()" i18n>
+          Log out
+          <i class="fas fa-sign-out-alt" item-width="50%"></i>
+        </button>
+      </a>
+    </ul>
+   
+  
+  </div>
+</nav>

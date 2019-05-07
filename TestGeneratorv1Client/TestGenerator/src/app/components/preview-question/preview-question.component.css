@@ -1,0 +1,16 @@
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+td:nth-child(10){
+    max-width: 100px;
+    max-height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-decoration: none;
+    display: flow;
+}
+td:first-child{
+    text-align: center;
+}

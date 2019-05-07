@@ -1,0 +1,6 @@
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+td:first-child{
+  text-align: center;
+}

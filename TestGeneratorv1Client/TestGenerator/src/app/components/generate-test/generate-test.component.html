@@ -1,0 +1,304 @@
+
+<app-header></app-header>
+
+<div class="container-fluid">
+    <div class="col-10 offset-1">
+      <div class="customAlert">
+        <ngb-alert *ngIf="successMessage" [type]="alertType" (close)="successMessage = null">
+          <span [innerHTML]='successMessage'></span>
+
+        </ngb-alert>
+  
+      </div>
+
+        </div>
+        <div class="loadWrapper" *ngIf="isLoading">  
+            <div class="loader"></div>  
+          </div>
+  <div class="row mt-5" >
+
+    <form class="col-4 offset-1 border-form" [formGroup]="testForm">
+      <div class="row"> 
+        <div class="form-group col-12" >
+          <label i18n>Total Difficulty Level</label>
+          <input class="form-control" type="number"  i18n-placeholder title="The average difficulty level of the test."  step="0.1" formControlName="totalDifficultyLevel" min = 1.0 max = 5.0 placeholder="Total Difficulty Level" [(ngModel)]="test.totalDifficultyLevel" required/>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class= "form-group col-12">
+          <label i18n>Number of Questions</label>
+          <input class="form-control"  i18n-placeholder  title="Number of questions" formControlName="numberOfQuestions" min="1" type="number" placeholder="Number of Questions" [(ngModel)]="test.numberOfQuestions" required/>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class= "form-group col-12" >
+          <label i18n>Max Difficulty level</label>
+          <ng-container *ngIf="difficultyLevels && difficultyLevels.length > 0">
+            <select class="form-control" (change)="onChangeDifficultyLevel($event.target.value)" i18n title="The max difficulty level, question can't have difficulty level greater than the max.">
+                <option *ngFor="let item of difficultyLevels; let i = index" [value]="i">{{item.level}}</option>
+              </select>
+          </ng-container>
+
+        </div>
+      </div>
+    </form>
+    <form class="col-5 offset-1 border-form">
+        <div class="row">
+            <div class= "form-group col-12" >
+
+            <label i18n>Subject</label>
+            <ng-container *ngIf="subjects && subjects.length > 0">
+              <select class="form-control" (change)="onChangeSubject($event.target.value)" title="Subject" i18n>
+              <option *ngFor="let item of subjects; let i = index" [value]="i">{{item.subjectName}}</option>
+                  </select>
+            </ng-container>
+            </div>
+        </div>
+        <div class="row">
+            <div class= "form-group col-12" >
+
+            <label i18n>Year of study</label>
+            <div class="ml-3">
+            <ng-container *ngIf="yearOfStudies  && yearOfStudies.length > 0">
+              <ng-container *ngFor="let item of yearOfStudies; let i = index" title="Year of studies included in the test" i18n>
+                    <input type="checkbox"  class="ml-3 mr-1"  (change) ="updateSelectedYOS($event,item)"/>
+                    <label >{{item.yearOfStudyName}}   </label>
+
+                  </ng-container>
+            </ng-container>
+          </div>
+        </div>
+        </div>
+        <div class="row">
+            <div class= "form-group col-12" >
+            <label i18n>Areas</label>
+            <div class="ml-3">
+            <ng-container *ngIf="areas && areas.length > 0">
+                    <ng-container *ngFor="let item of areas; let i = index" title="Areas included in the test" i18n>
+                        <input type="checkbox" class="ml-3 mr-1"  (change) ="updateSelectedAreas($event,item)"/>
+                        <label >{{item.areaName}}</label>
+                      </ng-container>
+              </ng-container>
+            </div>
+        </div>
+      </div>
+    </form>
+    </div>
+    <div class="row mt-5 mb-5">
+    <form class="col-4 offset-1 border-form">
+        <div class="row">
+            <div class= "form-group col-12" >
+            <label i18n>Question Types</label>
+                <ng-container *ngIf="questionTypes && questionTypes.length > 0">
+                    <ng-container *ngFor="let item of test.count; let i = index"  title="Question types and the number of questions qith that type in test" i18n>
+                      <div class="row">
+
+                        <div class ="col-5 pl-5">
+                          <label >{{item.key.quesstionTypeName}}</label>
+                        </div>
+                        <div class ="col-4 mb-2">
+
+                        <input class="form-control" type="number" min="0" [(ngModel)]="item.value" [ngModelOptions]="{standalone: true}"/>
+                        </div>
+                      </div>
+                      </ng-container>
+              </ng-container>
+        </div>
+      </div>
+    </form>
+    <form class="col-5 offset-1 border-form"  [formGroup]="testForm">
+        <div class="row">
+            <div class="form-group col-12" >
+              <label i18n>Test title </label>
+              <input class="form-control" formControlName="note" placeholder="Test title" title="Title of the test"  i18n-placeholder [(ngModel)]="test.note"required/>
+            </div>
+          </div>
+      <div class="row">
+          <div class= "form-group col-12" >
+              <label i18n>Test Group</label>
+              <input class="form-control" formControlName="testGroup" title="Test group"  i18n-placeholder placeholder="Test Group" [(ngModel)]="test.testGroup" required/>
+  
+            </div>
+      </div>
+        <div class="row">
+          <div class="form-group col-12"  title="Class group" i18n-title>
+            <label i18n>Group </label>
+            <input class="form-control" formControlName="group"  title="Date writen on the test" i18n-placeholder placeholder="Group" [(ngModel)]="test.group" required/>
+          </div>
+        </div>
+        <div class="row">
+          
+          <div class="form-group col-12">
+              <label i18n>Test date </label>
+              <div class="row ml-1">
+                <input type="date" formControlName="testDate" title="Test date" [(ngModel)]="test.date" required>
+              </div>
+    
+            </div>
+        </div>
+        <div class="row">
+          <div class= "form-group col-5">
+            <input type="checkbox" class="m-2" (change) ="generateWithAnswers()"/>
+            <label i18n>Generate with answers</label>
+          </div>
+          <div class= "form-group col-6">
+            <input type="checkbox" class="m-2" (change) ="generateWithBlankSpace()"/>
+            <label i18n>Leave blank space for answer</label>
+          </div>
+          <div class= "form-group col-6">
+              <input type="checkbox" class="m-2" (change) ="generateTableTest()"/>
+              <label i18n>Table view</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class= "col-3 ml-3 mb-3" title="Generate test" i18n-title>
+            <button class="btn"  (click)="open(content)"    [disabled]="!testForm.valid || subjects.length==0 || areas.length==0">
+              <label i18n>Generate Test</label>
+            </button>
+          </div>
+        </div>
+      </form>
+  </div>
+</div>
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+
+  <div class="modal-header headerPreviewTest" >
+
+    <div class= "col-12">
+      <div class="row">
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          <div class="modal-title"  >
+              {{test.note}}
+          </div>
+      </div>
+      <div class="row" >
+          <div class="nameSurename" i18n>
+              Name and Surname: _______________
+            </div>
+          <div class="group" i18n>
+              Group: {{test.group}}
+          </div>
+
+      </div>
+      <div class="row">
+          <div class="date" i18n>
+              Date: {{test.date}}
+          </div>
+          <div class="group" i18n >
+              Test Group: {{test.testGroup}}
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-body">
+    <form class="col-11 offset-1 border-form">
+        <ng-container *ngIf="questions && questions.length>0">
+
+      <div class="row">
+
+        <ng-container *ngFor="let question of questions; let i = index">
+          <div class="col-12">
+              <div class="row" >
+                  <div class="col-5">
+                      <div class="questionNumber" i18n><b>Question {{i+1}}.</b></div>
+                  </div>
+                  <div class="col-5">
+                    <div class="questionPoints">[{{question.points}}]</div>
+
+                  </div>
+                  <div class="col-2">
+
+                      <button  class="close replaceButton" (click)="replaceQuestion(con,i)" (click)="c('replaceQuestion')">
+                        <i class="fas fa-exchange-alt"></i>
+                      </button>
+
+                      <button class="btn deleteButton" (click)="deleteQuestion(i)" >
+                          <i class="fas fa-times-circle"></i>
+                        </button>
+                  </div>
+              </div>
+            <div class="row">
+
+        <div class="form-group mt-1 ml-4 textQuestion">
+            <span [innerHTML]='question.questionText'></span>
+        </div>
+
+        <ng-container *ngIf="question.questionImage">
+          <img src='data:image/png;base64,{{question.questionImage}}' height="350" width="350">
+        </ng-container>
+      </div>
+        </div>
+        </ng-container>
+      </div>
+      <div class="row" i18n>
+        Number of questions:  {{questions.length}}
+      </div>
+    </ng-container>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c(submit())" i18n>
+          Save Test
+    </button>
+
+  </div>
+</ng-template>
+
+
+
+
+<ng-template #con let-c="close" let-d="dismiss" >
+    <div class="modal-header headerCustom" >
+      <h4 i18n>Questions</h4>
+      <button type="button" class="close" aria-label="Close"  (click)="c(changeQuestion(content,-1))" style="color: white">
+          <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <table>
+                <tr>
+                    <th i18n>Number</th>
+                    <th i18n>Area</th>
+                    <th i18n>Year Of Study</th>
+                    <th i18n>DifficultyLevel</th>
+                    <th i18n>Question Type</th>
+                    <th i18n>Points</th>
+                    <th i18n>Preview</th>
+                </tr>
+                  <tr  *ngFor="let item of allQuestions | paginate: {  itemsPerPage: 10, currentPage: page, totalItems: count}; let i=index">
+                      <td> {{((page-1)*10)+(i+1)}}</td>
+                      <td> {{item.area.areaName}} </td>
+                    <td> {{item.area.yearOfStudy.yearOfStudyName}} </td>
+                    <td>{{item.difficultyLevel.level}}</td>
+                    <td>{{item.questionType.quesstionTypeName}}</td>
+
+                    <td>{{item.points}}</td>
+
+                    <td>
+                            <i  class="fa fa-search" item-width="50%" data-toggle="tooltip" title="{{item.questionText}}" data-html="true" i18n></i>
+
+                      </td>
+                        <td>
+
+                          <button class="btn" style="color: seagreen" [disabled]="!exists(item)" (click)="c(changeQuestion(content,i))">
+                            <i class="far fa-check-circle" item-width="50%"> </i>
+                            </button>
+                        </td>
+
+
+            </table>
+
+            <pagination-controls (pageChange)="pageChanged($event)"                       maxSize="10"></pagination-controls>
+
+      </div>
+
+  </ng-template>
+
+
+<app-footer></app-footer>

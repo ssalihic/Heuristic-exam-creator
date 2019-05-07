@@ -1,0 +1,247 @@
+<app-header></app-header>
+<div class="container-fluid">
+  <div class="row mt-5 mb-5" >
+      <div class="loadWrapper" *ngIf="isLoading">  
+          <div class="loader"></div>  
+        </div>
+    <form class="col-10 offset-1 border-form">
+      <div class="row">
+          <div class=" col-3 offset-1 ml-3 mt-2">
+              <h2  i18n>Tests </h2>
+
+            </div>
+            <div class = "form-group offset-3 col-5  mt-2">
+                <div class = "row">
+                    <input type="checkbox" class="m-2 mt-3 ml-3" (change) ="generateWithAnswers()"/>
+                    <label i18n>Generate with answers</label>
+                  
+                    <input type="checkbox" class="m-2 mt-3 ml-3" (change) ="generateWithBlankSpace()"/>
+                    <label i18n>Leave blank space for answer</label>
+                
+                      <input type="checkbox" class="m-2 mt-3 ml-3" (change) ="generateTableTest()"/>
+                      <label i18n>Table view</label>
+                </div>
+                 
+                </div>
+        <ng-container>
+          <table>
+            <tr>
+              <th> </th>
+              <th>
+                <ng-container *ngIf="subjects && subjects.length > 0">
+                  <select class="form-control" id="studyYear" (change)="onChangeSubject($event.target.value)">
+                    <option *ngFor="let item of subjects; let i = index" [value]="i">{{item.subjectName}}</option>
+                  </select>
+                </ng-container></th>
+      
+            </tr>
+
+            <tr>
+              <th i18n>Number</th>
+              <th i18n>Subject</th>
+              <th i18n>Test Title</th>
+              <th i18n>Group</th>
+              <th i18n>Test Group</th>
+              <th i18n>Year Of Study</th>
+              <th i18n>Test Date</th>
+              <th i18n>Created Date</th>
+              <th i18n>Preview</th>
+              <th></th>
+
+            </tr>
+            <ng-container *ngIf="tests.length==0" >
+              <div class="m-2" i18n>
+                  No tests!
+              </div>
+            </ng-container>
+            <tr  *ngFor="let item of tests | paginate: {  itemsPerPage: 10, currentPage: page, totalItems: count}; let i=index"  >
+              <td> {{((page-1)*10)+(i+1)}}</td>
+              <td> {{item.subject.subjectName}}</td>
+              <td> {{item.note}}</td>
+              <td> {{item.group}} </td>
+              <td> {{item.testGroup}} </td>
+
+              <td> {{item.yearOfStudy.yearOfStudyName}} </td>
+              <td> {{item.date}} </td>
+
+              <td> {{item.createdDate.substring(0,16)}} </td>
+              <td>
+
+              <button class="btn"  (click)="preview(content,item)" i18n title="Preview test" style="margin-right:5px">
+                <i class="fa fa-search" item-width="50%" ></i>
+              </button>
+              <button class="btn"  (click)="printPdf(item)" title="Print test" i18n>
+             
+                      <i class="fas fa-print"></i>
+              </button>
+              </td>
+              <td>
+                  <button class="btn"  (click)="repeatTest(repeatContent,item)"  i18n>
+                    Repeat Test
+                  </button>
+              </td>
+            </tr>
+
+          </table>
+          <pagination-controls (pageChange)="pageChanged($event)"                       maxSize="9"></pagination-controls>
+        </ng-container>
+      </div>
+    </form>
+  </div>
+</div>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header headerPreviewTest" >
+    
+    <div class= "col-12">
+       <div class="row">
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+       </div>
+      <div class="row">
+        <div class="modal-title testNote">
+          {{test.note}}
+        </div>
+      </div>
+      <div class="row" >
+          <div class="nameSurename" i18n>
+              Name and Surname: _______________
+            </div>
+          <div class="testGroup" i18n>
+              Test Group: {{test.testGroup}}
+          </div>
+
+      </div>
+      <div class="row">
+          <div class="date" i18n >
+              Date: {{test.date}}
+          </div>
+          <div class="group" i18n>
+              Group: {{test.group}}
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-body">
+    <form class="col-11 offset-1 border-form">
+      <div class="row">
+        <ng-container *ngIf="test.testQuestions && test.testQuestions.length>0">
+        <ng-container  *ngFor="let item of test.testQuestions; let i = index">
+          <div class="col-12">
+            <div class="row" >
+              <div class="col-5">
+                <div class="questionNumber" i18n><b>Question {{i+1}}.</b></div>
+              </div>
+              <div class="col-5">
+                <div class="questionPoints" >[{{item.question.points}}]</div>
+
+              </div>
+              <div class="col-2">
+
+
+              </div>
+            </div>
+            <div class="row">
+
+              <div class="form-group mt-1 ml-4 textQuestion" >
+                <span [innerHTML]='item.question.questionText'></span>
+              </div>
+
+              <ng-container *ngIf="item.question.questionImage">
+                <img src='data:image/png;base64,{{item.question.questionImage}}' height="350" width="350">
+              </ng-container>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+  </div>
+</ng-template>
+
+
+<ng-template #repeatContent let-c="close" let-d="dismiss">
+    <div class="modal-header" >
+      <div class= "col-12">
+        <div class="row">
+                <div class="col-3 offset-5"  >
+
+                <input class="form-control" i18n-placeholder placeholder="Test Title" [(ngModel)]="test.note" />
+                </div>
+
+        </div>
+        <div class="row">
+            <div class="col-3 offset-1" i18n >
+                Name and Surname: _______________
+              
+            </div>
+           
+            <div class="col-3 offset-5"  i18n>
+                Test Group:
+                <input class="form-control" i18n-placeholder placeholder="Test Group" [(ngModel)]="test.testGroup" />
+            </div>
+
+        </div>
+        <div class="row">
+          <div class="col-3 offset-1" i18n>
+              Date:                 <input class="form-control" i18n-placeholder  placeholder="Test Date" [(ngModel)]="test.date" />
+          </div>
+            <div class="col-3 offset-5"  i18n>
+                Group:
+                  <input class="form-control" i18n-placeholder placeholder="Group" [(ngModel)]="test.group" />
+            </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="modal-body">
+      <form class="col-11 offset-1 border-form">
+          <ng-container *ngIf="test.testQuestions && test.testQuestions.length>0">
+
+        <div class="row">
+
+          <ng-container *ngFor="let item of test.testQuestions; let i = index">
+            <div class="col-12">
+                <div class="row" >
+                    <div class="col-5">
+                        <div class="questionNumber"><b>Question {{i+1}}.</b></div>
+                    </div>
+                    <div class="col-5">
+                      <div class="questionPoints">[{{item.question.points}}]</div>
+
+                    </div>
+
+                </div>
+              <div class="row">
+
+          <div class="form-group mt-1 ml-4 textQuestion" >
+            <span [innerHTML]='item.question.questionText'></span>
+          </div>
+          <ng-container *ngIf="item.question.questionImage">
+            <img src='data:image/png;base64,{{item.question.questionImage}}' height="350" width="350">
+          </ng-container>
+        </div>
+          </div>
+          </ng-container>
+        </div>
+        <div class="row">
+          Number of questions :  {{test.testQuestions.length}}
+        </div>
+      </ng-container>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="c(repeat())" i18n> Repeat</button>
+    </div>
+  </ng-template>
+
+
+
+
+
+
+
+<app-footer></app-footer>
+

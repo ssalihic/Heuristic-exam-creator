@@ -1,0 +1,136 @@
+<app-header>
+
+</app-header>
+<div class="col-11 offset-1">
+
+</div>
+<div class="loadWrapper" *ngIf="isLoading">  
+    <div class="loader"></div>  
+  </div>
+<form class="col-7 offset-1 mt-5 border-form">
+    <div class="row">
+        <div class="ml-3 mt-2">
+            <h3  i18n>Recent tests</h3>
+          </div>
+      <ng-container>
+        <table>
+          <tr>
+            <th i18n>Number</th>
+            <th i18n>Subject</th>
+            <th i18n>Test Title</th>
+            <th i18n>Group</th>
+            <th i18n>Test Group</th>
+            <th i18n>Year Of Study</th>
+            <th i18n>Test Date</th>
+            <th i18n>Created Date</th>
+            <th i18n>Preview</th>
+
+          </tr>
+          <ng-container *ngIf="tests.length==0" >
+            <div class="m-2" i18n>
+                No tests!
+            </div>
+          </ng-container>
+          <tr  *ngFor="let item of tests; let i=index"  >
+            <td> {{(i+1)}}</td>
+            <td> {{item.subject.subjectName}}</td>
+            <td> {{item.note}}</td>
+            <td> {{item.group}} </td>
+            <td> {{item.testGroup}} </td>
+
+            <td> {{item.yearOfStudy.yearOfStudyName}} </td>
+            <td> {{item.date}} </td>
+
+            <td> {{item.createdDate.substring(0,16)}} </td>
+            <td>
+
+            <button class="btn"  (click)="preview(content,item)" style="margin-right:5px">
+              <i class="fa fa-search" item-width="50%" ></i>
+            </button>
+            <button class="btn"  (click)="printPdf(item)">
+           
+                    <i class="fas fa-print"></i>
+            </button>
+            </td>
+           
+          </tr>
+
+        </table>
+      </ng-container>
+    </div>
+  </form>
+
+  <ng-template #content let-c="close" let-d="dismiss">
+      <div class="modal-header headerPreviewTest">
+        <div class= "col-12">
+            <div class="row">
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+             </div>
+          <div class="row">
+            <div class="modal-title testNote"   >
+              {{test.note}}
+            </div>
+          </div>
+          <div class="row" >
+              <div class="nameSurename" i18n>
+                  Name and Surname: _______________
+                </div>
+              <div class="group" i18n>
+                  Test Group: {{test.testGroup}}
+              </div>
+    
+          </div>
+          <div class="row">
+              <div class="date" i18n>
+                  Date: {{test.date}}
+              </div>
+              <div class="testGroup" i18n>
+                  Group: {{test.group}}
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <form class="col-11 offset-1 border-form">
+          <div class="row">
+            <ng-container *ngIf="test.testQuestions && test.testQuestions.length>0">
+            <ng-container  *ngFor="let item of test.testQuestions; let i = index">
+              <div class="col-12">
+                <div class="row" >
+                  <div class="col-5">
+                    <div class="questionNumber" i18n><b>Question {{i+1}}.</b></div>
+                  </div>
+                  <div class="col-5">
+                    <div class= "questionPoints">[{{item.question.points}}]</div>
+    
+                  </div>
+                  <div class="col-2">
+    
+    
+                  </div>
+                </div>
+                <div class="row">
+    
+                  <div class="form-group mt-1 ml-4 textQuestion">
+                    <span [innerHTML]='item.question.questionText'></span>
+                  </div>
+    
+                  <ng-container *ngIf="item.question.questionImage">
+                    <img src='data:image/png;base64,{{item.question.questionImage}}' height="350" width="350">
+                  </ng-container>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </ng-template>
+    
+<app-footer>
+
+</app-footer>

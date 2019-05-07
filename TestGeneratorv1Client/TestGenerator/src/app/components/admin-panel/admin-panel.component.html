@@ -1,0 +1,173 @@
+<app-header></app-header>
+<div class="container-fluid">
+  <div class="col-10 offset-1 mt-5 mb-5">
+    <div class="col-11">
+      <div class="customAlert">
+        <ngb-alert *ngIf="successMessage" [type]="alertType" (close)="successMessage = null">
+          <span [innerHTML]='successMessage'></span>
+
+        </ngb-alert>
+  
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6  mt-5">
+        <div class="accordion" id="accordionExample">
+
+          <div class="card">
+            <div class="card-header" id="headingOne">
+              <h5 class="mb-0">
+                <button class="btn btn-link" type="button" (click)="collapseSubject()" aria-expanded="true" aria-controls="collapseOne" style="color:black" i18n>
+                  Add Subject
+                </button>
+              </h5>
+            </div>
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample" *ngIf="subjectShow">
+              <div class="card-body">
+                <form class="col-4 offset-1 border-form" [formGroup]="subjectForm">
+                  <div class="row">
+                    <div class="form-group col-9">
+                      <label></label>
+                      <input formControlName="subjectName" i18n-placeholder placeholder="Subject name" id="name" name="name" class="form-control" [(ngModel)]="subject.subjectName"
+                        required (input)="onSearchChange($event.target.value)">
+
+                      <option class="accordionCustom" *ngFor="let item of subjectsSearch; let i = index" [value]="i">{{item.subjectName}}</option>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-9">
+                      <button (click)="addSubjectButton()" [disabled]="!subjectForm.valid || !subjectsSearch.length<=0" i18n>Add
+                        Subject</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-6  mt-5">
+        <div class="accordion" id="accordionExample">
+
+          <div class="card">
+            <div class="card-header" id="headingTwo">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" (click)="collapseArea()" aria-expanded="false" aria-controls="collapseTwo"
+                  style="color:black" i18n>
+                  Add Area
+                </button>
+              </h5>
+            </div>
+            <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample" *ngIf="areaShow">
+              <div class="card-body">
+                <form class="col-4 offset-1 mt-5 border-form" [formGroup]="areaForm">
+                  <div class="row">
+                    <div class="form-group col-9">
+                      <label></label>
+                      <input class="form-control" formControlName="areaName"  i18n-placeholder placeholder="Area name" [(ngModel)]="area.areaName" required (input)="onSearchChangeArea($event.target.value)"
+                      />
+                      <option  class="accordionCustom" *ngFor="let item of areasSearch; let i = index" [value]="i">{{item.areaName}}</option>
+
+
+                      <label for="studyYear" i18n>Year of study</label>
+                      <select class="form-control" id="studyYear" (change)="onChangeYearOfStudy($event.target.value)">
+                        <option *ngFor="let item of yearOfStudies; let i = index" [value]="i">{{item.yearOfStudyName}}</option>
+                      </select>
+                      <label for="studyYear" i18n>Subject</label>
+                      <select class="form-control" id="subject" (change)="onChangeSubject($event.target.value)">
+                        <option *ngFor="let item of subjects; let i = index" [value]="i">{{item.subjectName}}</option>
+                      </select>
+                    </div>
+
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-9">
+                      <button (click)="addAreaButton()" [disabled]="!areaForm.valid" i18n>Add Area</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 mt-5">
+        <div class="accordion" id="accordionExample">
+
+          <div class="card">
+            <div class="card-header" id="headingThree">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" (click)="collapseUser()" aria-expanded="false" aria-controls="collapseThree"
+                  style="color:black" i18n>
+                  Add User
+                </button>
+              </h5>
+            </div>
+            <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordionExample" *ngIf="userShow">
+              <div class="card-body">
+
+                <form class="col-11 offset-1 mt-5 border-form" [formGroup]="userForm">
+                  <div class="row">
+                    <div class="form-group col-9">
+                      <label></label>
+                      <div class="row">
+                        <div class="col-6">
+                            <label for="studyYear" i18n>Name</label>
+                            <input formControlName="name" placeholder="Name"  i18n-placeholder id="name" name="name" class="form-control" [(ngModel)]="user.name" required>
+     
+                        
+                      <label for="studyYear" i18n>Email</label>
+
+                      <input formControlName="email"  i18n-placeholder placeholder="Email" id="email" name="name" class="form-control" [(ngModel)]="user.email" required>
+                      <label for="studyYear" i18n>Password</label>
+
+                      <input formControlName="password" type="password"  i18n-placeholder placeholder="Password" id="pass" name="name" class="form-control" [(ngModel)]="user.password"
+                        required>
+                      <label for="studyYear" i18n>Confirm Password</label>
+
+                      <input formControlName="confirmPassword" type="password"  i18n-placeholder placeholder="Confirm Password" id="cpass" name="name" class="form-control"
+                        [(ngModel)]="user.confirmPassword" required>
+                     
+                      <input type="checkbox" class="mr-2 mt-4" (change)="updateSelectedAdminRole()" />
+                      <label i18n>App Admin</label>
+                    </div>
+
+                        <div class="col-6">
+
+                                               <label i18n>Subjects</label>
+                        <ng-container *ngIf="allSubjects && allSubjects.length > 0">
+                          <ng-container *ngFor="let item of allSubjects; let i = index">
+                            <div class="pl-5">
+                              <input type="checkbox" class="mr-2" (change)="updateSelectedSubjects($event,item)" />
+                              <label>{{item.subjectName}}</label>
+                            </div>
+                          </ng-container>
+                        </ng-container>
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-9">
+                      <button (click)="addUser()" [disabled]="!userForm.valid || user.subjects.length<=0" i18n>Add User</button>
+                      <ng-container *ngIf="error">
+                        {{error}}
+                      </ng-container>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

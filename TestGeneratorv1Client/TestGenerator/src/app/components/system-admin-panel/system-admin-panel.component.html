@@ -1,0 +1,62 @@
+<app-header>
+
+</app-header>
+<div class="container-fluid">
+  <div class="col-10 offset-1 mt-5 mb-5">
+    <div class="col-11">
+      <div class="customAlert">
+        <ngb-alert *ngIf="successMessage" [type]="alertType" (close)="successMessage = null">
+          <span [innerHTML]='successMessage'></span>
+
+        </ngb-alert>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6  mt-5">
+        <div class="accordion" id="accordionExample">
+          <div class="card">
+            <div class="card-header" id="headingOne">
+              <h5 class="mb-0">
+                <button class="btn btn-link" type="button" (click)="collapseSubject()" aria-expanded="true"
+                  aria-controls="collapseOne" style="color:black" i18n>
+                  Add Question Type
+                </button>
+              </h5>
+              
+            </div>
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample" *ngIf="questionTypeShow">
+                <div class="card-body">
+                  <form class="col-4 offset-1 border-form" [formGroup]="questionTypeForm">
+                    <div class="row">
+                      <div class="form-group col-12">
+                        <label></label>
+                        <input formControlName="quesstionTypeName"  i18n-placeholder placeholder="Question type name" id="name" name="name" class="form-control" [(ngModel)]="questionType.quesstionTypeName"
+                          required (input)="onSearchChange($event.target.value)">
+  
+                        <option class="accordionCustom" *ngFor="let item of questionTypeSearch; let i = index" [value]="i">{{item.quesstionTypeName}}</option>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="form-group col-12">
+                        <button (click)="addQuestionTypeButton()" [disabled]="!questionTypeForm.valid || !questionTypeSearch.length<=0" i18n>Add Question Type</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+                             
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<app-footer>
+
+</app-footer>

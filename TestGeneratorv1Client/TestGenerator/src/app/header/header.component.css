@@ -1,0 +1,23 @@
+.navbar{
+    background-color:#002d60;
+    color: #fafafa;
+    padding-bottom: 1%; 
+    padding-top: 1%; 
+    padding-left: 8%;  
+    padding-right: 2%;  
+}
+a {
+    color: #fafafa;
+    font-size: 18px;
+}
+a.navbar-brand{
+    font-size: 24px;
+}
+.btn{
+    color: #fafafa;
+    background: #002d60;
+}
+.userHeader{
+    text-align: center;
+    padding-top: 3%;
+}

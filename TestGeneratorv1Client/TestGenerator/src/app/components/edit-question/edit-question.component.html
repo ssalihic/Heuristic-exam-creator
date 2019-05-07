@@ -1,0 +1,149 @@
+<app-header></app-header>
+
+<div class="container-fluid">
+  <div class="col-3 offset-8 mt-5">
+    <div class="customAlert">
+      <ngb-alert *ngIf="successMessage" [type]="alertType" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+
+    </div>
+  </div>
+  <div class="row mt-5">
+
+    <form class="col-5 offset-1 border-form" >
+      <button class="editQuestion" (click)="editQuestionButton()">
+          <i class="far fa-check-circle"></i>
+
+
+        </button>
+
+      <div class="row">
+        <div class="form-group col-6">
+          <label for="questionType" i18n>Question type</label>
+          <select class="form-control" id="questionType"   ng-model ="question.questionType" (change)="onChangeQuestionType($event.target.value)">
+            <option *ngFor="let item of questionTypes; let i = index" [value]="i" ng-value="item"  [selected]="item.questionTypeId == question.questionType.questionTypeId">{{item.quesstionTypeName}}</option>
+          </select>
+        </div>
+
+        <div class="form-group col-6">
+          <label for="numPoints" i18n>Number of points</label>
+          <input  min="0" id="numPoints" type="number" name="points" class="form-control" required minlength="2"
+            [(ngModel)]="question.points" required >
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="form-group col-6">
+          <label for="difficultyLevel" i18n>Difficulty level</label>
+          <select class="form-control" id="difficultyLevel"  ng-model="question.difficultyLevel" (change)="onChangeDifficultyLevel($event.target.value)">
+            <option *ngFor="let item of difficultyLevels; let i = index" [value]="i" ng-value="item" [selected]="item.difficultyLevelId === question.difficultyLevel.difficultyLevelId">{{item.level}}</option>
+          </select>
+        </div>
+
+        <div class="form-group col-6">
+          <label for="status" i18n>Status</label>
+          <select   class="form-control" ng-model="question.status" (change)="onChangeStatus($event.target.value)">
+            <option *ngFor="let item of statuses; let i = index" [value]="i" ng-value="item"  [selected]="item.statusId === question.status.statusId">{{item.statusName}}</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-12 text-center pb-3">
+          <label i18n>Visibility</label>
+        </div>
+        <div class="form-group col-12 text-center">
+          <ng-container *ngIf="visibilities && visibilities.length> 1">
+
+            <ng-container  *ngFor="let item of visibilities; let i = index" >
+                <input type="radio" (change) ="onChangeVisibility($event,item)" name="occurrences" ng-value="item" ng-model="question.visibility" [checked]="item.visibilityId === question.visibility.visibilityId" />
+                <label class="mr-3">{{ item.visibilityName}}  </label>
+            </ng-container>
+          </ng-container>        </div>
+
+      </div>
+
+    </form>
+    <div class="col-4 offset-1 border-form">
+      <form>
+        <div class="row">
+          <div class="form-group col-12">
+            <label for="questionSubject" i18n>Subject</label>
+            <select class="form-control" id="questionSubject" ng-model="question.subject"  (change)="onChangeSubj($event.target.value)">
+              <option *ngFor="let item of subjects; let i = index" [value]="i" ng-value="item" >{{item.subjectName}}</option>
+            </select>
+          </div>
+
+          <div class="form-group col-12">
+
+            <label for="studyYear" i18n>Year of study</label>
+            <select class="form-control" id="studyYear" ng-model="question.yearOfStudy"  (change)="onChangeYearOfStudy($event.target.value)">
+              <option *ngFor="let item of yearOfStudies; let i = index" [value]="i" ng-value="item">{{item.yearOfStudyName}}</option>
+            </select>
+
+          </div>
+          <div class="form-group col-12">
+
+            <label for="questionArea" i18n>Area</label>
+            <select class="form-control" id="questionArea" ng-model="question.area" (change)="onChangeArea($event.target.value)">
+              <option *ngFor="let item of areas; let i = index" [value]="i" ng-value="item">{{item.areaName}}</option>
+            </select>
+          </div>
+
+        </div>
+      </form>    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row mt-5">
+    <form class="col-10 offset-1 border-form">
+      <div class="row">
+        <div class="form-group col-9">
+          <label class="d1" i18n>Question text</label>
+          <app-ngx-editor class="editor" height="300px" [(ngModel)]="question.questionText" [ngModelOptions]="{standalone: true}">
+          </app-ngx-editor>
+        </div>
+        <div class="form-group col-2">
+          <input class="Upload" type='file' (change)="onSelectQuestionImage($event)" accept=".png, .jpg, .jpeg">
+          <ng-container *ngIf="question.questionImage">
+            <img src='data:image/png;base64,{{question.questionImage}}' height="80%" width="150%">
+          </ng-container>
+          <ng-container *ngIf="!question.questionImage">
+              <img [src]='urlQuestion' height="80%" width="150%">
+
+            </ng-container>
+              </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row mt-5 mb-5">
+    <form class="col-10 offset-1 border-form">
+      <div class="row">
+        <div class="form-group col-9">
+          <label class="d1"i18n> Question answer</label>
+          <app-ngx-editor class="editor" height="300px" [(ngModel)]="question.answer.answerText"
+            [ngModelOptions]="{standalone: true}"> </app-ngx-editor>
+        </div>
+        <div class="form-group col-2">
+          <input class="Upload" type='file' (change)="onSelectAnswerImage($event)" accept=".png, .jpg, .jpeg">
+          <ng-container *ngIf="question.answer.answerImage">
+            <img src='data:image/png;base64,{{question.answer.answerImage}}' height="80%" width="150%">
+
+          </ng-container>
+          <ng-container *ngIf="!question.answer.answerImage">
+            <img [src]='urlAnswer' height="80%" width="150%">
+
+          </ng-container>
+
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>
+<app-footer></app-footer>

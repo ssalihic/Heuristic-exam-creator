@@ -1,0 +1,154 @@
+<ng-container *ngIf="test && !tableView">
+  <div class="col-8 offset-2 mt-5">
+    <div class="row mb-2">
+      <div class="testNote">
+        {{test.note}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="nameSurename" i18n>
+        Name and Surname: _______________
+      </div>
+      <div class="testGroup" i18n>
+        Test Group: {{test.testGroup}}
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="date" i18n>
+        Date: {{test.date}}
+      </div>
+      <div class="group" i18n>
+        Group: {{test.group}}
+      </div>
+    </div>
+  </div>
+  <hr>
+
+  <form class="col-8 offset-2 border-form mt-5">
+    <ng-container *ngIf="test.testQuestions && test.testQuestions.length>0">
+
+      <div class="row">
+
+        <ng-container *ngFor="let item of test.testQuestions; let i = index">
+          <div class="col-12">
+            <div class="row">
+              <div class="col-9">
+                <div class="questionNumber"><b i18n>Question {{i+1}}.</b></div>
+              </div>
+              <div class="col-3 ">
+                <div class="questionPoints">[{{item.question.points}}]</div>
+
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="questionTextShow">
+              <div class="form-group mt-1 ml-4">
+                <span [innerHTML]='item.question.questionText'></span>
+              </div>
+              <br>
+              <ng-container *ngIf="item.question.questionImage">
+                <img src='data:image/png;base64,{{item.question.questionImage}}' height="350" width="350">
+              </ng-container>
+              <ng-container *ngIf="withBlankSpace">
+                <p>
+                  <br> <br> <br> <br> <br> <br> <br>
+                </p>
+              </ng-container>
+              <ng-container *ngIf="withAnswer && item.question.answer">
+                <div class="ml-4 questionAnswer" i18n>Answer: <br>
+
+                  <span [innerHTML]='item.question.answer.answerText'></span>
+                </div>
+                <br>
+                <ng-container *ngIf="item.question.answer.answerImage">
+                  <img src='data:image/png;base64,{{item.question.answer.answerImage}}' height="350" width="350">
+                </ng-container>
+              </ng-container>
+            </div>
+          </div>
+          </div>
+        </ng-container>
+      </div>
+
+    </ng-container>
+  </form>
+  <hr>
+
+  <div class="col-3 offset-9 mt-5">
+    {{test.creator.name}}
+  </div>
+</ng-container>
+
+<ng-container *ngIf="test && tableView">
+  <div class="col-8 offset-2 mt-5">
+    <div class="row mb-2">
+      <div class="testNote">
+        {{test.note}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="nameSurename" i18n>
+        Name and Surname: _______________
+      </div>
+      <div class="testGroup" i18n>
+        Test Group: {{test.testGroup}}
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="date" i18n>
+        Date: {{test.date}}
+      </div>
+      <div class="group" i18n>
+        Group: {{test.group}}
+      </div>
+    </div>
+  </div>
+  <hr>
+
+  <form class="col-10 offset-1 border-form mt-5">
+      <table class="testTable">
+
+        <tr>
+          <th i18n>Number</th>
+          <th i18n>Question Text</th>
+          <th i18n>Question Answer</th>
+          <th i18n>Points</th>
+          <th i18n>Achieved points</th>
+        </tr>
+
+        <tr *ngFor="let item of test.testQuestions; let i = index">
+          <td> {{i+1}}</td>
+          <td> <span [innerHTML]='item.question.questionText'></span>
+            <ng-container *ngIf="item.question.questionImage">
+              <img src='data:image/png;base64,{{item.question.questionImage}}' height="350" width="350">
+            </ng-container>
+
+          </td>
+          <td>
+            <ng-container *ngIf="withAnswer && item.question.answer">
+              <div class="textQuestion">
+
+                <span [innerHTML]='item.question.answer.answerText'></span>
+              </div>
+              <br>
+              <ng-container *ngIf="item.question.answer.answerImage">
+                <img src='data:image/png;base64,{{item.question.answer.answerImage}}' height="350" width="350">
+              </ng-container>
+            </ng-container>
+          </td>
+          <td> {{item.question.points}} </td>
+            <td></td>
+        
+        </tr>
+      </table>
+
+  </form>
+  <hr>
+
+  <div class="col-3 offset-9 mt-5">
+    {{test.creator.name}}
+  </div>
+</ng-container>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TestGeneratorv1</name>
+    </assembly>
+    <members>
+        <member name="M:TestGeneratorv1.Controllers.AnswerController.Get">
+            <summary>
+            This is how we create a documentation
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

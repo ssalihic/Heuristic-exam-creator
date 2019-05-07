@@ -1,0 +1,10 @@
+<ng-container *ngIf="visibilities && visibilities.length> 1">
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked (change)="onSelectionChange(0)">
+    <label class="form-check-label" for="inlineRadio1">{{visibilities[0].visibilityName}}</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" (change)="onSelectionChange(1)">
+    <label class="form-check-label" for="inlineRadio2">{{visibilities[1].visibilityName}}</label>
+  </div>
+</ng-container>

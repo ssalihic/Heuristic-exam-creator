@@ -1,0 +1,135 @@
+<app-header></app-header>
+<div class="container-fluid">
+   <div class="row mt-5 mb-5" >
+      <div class="loadWrapper" *ngIf="isLoading">  
+          <div class="loader"></div>  
+        </div>
+      <form class="col-10 offset-1 border-form">
+        <div class="row">
+            <div class="ml-3 mt-2">
+                <h2 i18n>Questions</h2>
+
+              </div>
+            <ng-container *ngIf="questionsFilter">
+              <table>
+
+              <tr>
+                  <th> </th>
+                  <th>
+                    <ng-container *ngIf="subjects && subjects.length > 0">
+                      <select class="form-control" id="studyYear" (change)="onChangeSubject($event.target.value)">
+                          <option *ngFor="let item of subjects; let i = index" [value]="i">{{item.subjectName}}</option>
+                        </select>
+                    </ng-container></th>
+                  <th>
+                    <ng-container *ngIf="areas && areas.length > 0">
+                      <select class="form-control" id="studyYear" (change)="onChangeArea($event.target.value)">
+                          <option *ngFor="let item of areas; let i = index" [value]="i">{{item.areaName}}</option>
+                        </select>
+                    </ng-container></th>
+                  <th>  <ng-container *ngIf="yearOfStudies && yearOfStudies.length > 0">
+                      <select class="form-control" id="studyYear" (change)="onChangeYearOfStudy($event.target.value)">
+                          <option *ngFor="let item of yearOfStudies; let i = index" [value]="i">{{item.yearOfStudyName}}</option>
+                        </select>
+                    </ng-container></th>
+                  <th>
+                    <ng-container *ngIf="status && status.length > 0">
+                      <select class="form-control" id="studyYear" (change)="onChangeStatus($event.target.value)">
+                          <option *ngFor="let item of status; let i = index" [value]="i">{{item.statusName}}</option>
+                        </select>
+                    </ng-container></th>
+
+                  <th>  <ng-container *ngIf="visibilities && visibilities.length > 0">
+                      <select class="form-control" id="studyYear" (change)="onChangeVisibility($event.target.value)">
+                          <option *ngFor="let item of visibilities; let i = index" [value]="i">{{item.visibilityName}}</option>
+                        </select>
+                    </ng-container></th>
+                  <th>   <ng-container *ngIf="difficultyLevels && difficultyLevels.length > 0">
+                    <select class="form-control" id="studyYear" (change)="onChangeDifficultyLevel($event.target.value)">
+                        <option *ngFor="let item of difficultyLevels; let i = index" [value]="i">{{item.level}}</option>
+                      </select>
+                  </ng-container></th>
+
+                  <th> <ng-container *ngIf="questionTypes && questionTypes.length > 0">
+                      <select class="form-control" id="studyYear" (change)="onChangeQuestionType($event.target.value)">
+                          <option *ngFor="let item of questionTypes; let i = index" [value]="i">{{item.quesstionTypeName}}</option>
+                        </select>
+                    </ng-container></th>
+
+                </tr>
+
+                <tr>
+                  <th i18n>Number</th>
+                  <th i18n>Subject</th>
+                  <th i18n>Area</th>
+                  <th i18n>Year Of Study</th>
+                  <th i18n>Status</th>
+                  <th i18n>Visibility</th>
+                  <th i18n>Difficulty Level</th>
+                  <th i18n>Question Type</th>
+                  <th i18n>Number Of Points</th>
+
+
+                  <th i18n>Preview</th>
+                </tr>
+                <ng-container *ngIf="questionsFilter && questionsFilter.length==0" >
+                    <div class="mt-2 mb-2 ml-3"  i18n>
+                        No questions!
+                    </div>
+                  </ng-container>
+                <tr  *ngFor="let item of questionsFilter | paginate: {  itemsPerPage: 10, currentPage: page, totalItems: count}; let i=index"  >
+                  <td> {{((page-1)*10)+(i+1)}}</td>
+                  <td> {{item.subject.subjectName}}</td>
+                  <td> {{item.area.areaName}} </td>
+                  <td> {{item.area.yearOfStudy.yearOfStudyName}} </td>
+                  <td>{{item.status.statusName}}</td>
+                  <td>{{item.visibility.visibilityName}}</td>
+                  <td>{{item.difficultyLevel.level}}</td>
+                  <td>{{item.questionType.quesstionTypeName}}</td>
+                  <td>{{item.points}}</td>
+
+                  <td>
+                    <span [innerHTML]='item.questionText'></span>
+
+                  </td>
+                  <td>  <button class="btn"  (click)="preview(content,item, i+1)" title="Preview" i18n>
+                      <i class="fa fa-search" item-width="50%" ></i>
+                      </button></td>
+                </tr>
+
+              </table>
+
+              <pagination-controls (pageChange)="pageChanged($event)"                       maxSize="9"></pagination-controls>
+            </ng-container>
+          </div>
+        </form>
+    </div>
+</div>
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title"  i18n>Question {{number}}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form class="col-8 offset-1 border-form">
+        <div class="row">
+          <div class="form-group">
+            <span [innerHTML]='question.questionText'></span>
+          </div>
+          <ng-container *ngIf="question.questionImage">
+            <img src='data:image/png;base64,{{question.questionImage}}' height="350" width="350">
+          </ng-container>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="c(Edit())"  i18n>Edit</button>
+    </div>
+  </ng-template>
+
+
+
+`<app-footer></app-footer>
+

@@ -1,0 +1,33 @@
+C:\Users\User\source\repos\TestGeneratorv1\TestGeneratorv1\bin\Debug\netcoreapp2.0\TestGeneratorv1.deps.json
+C:\Users\User\source\repos\TestGeneratorv1\TestGeneratorv1\bin\Debug\netcoreapp2.0\TestGeneratorv1.runtimeconfig.json
+C:\Users\User\source\repos\TestGeneratorv1\TestGeneratorv1\bin\Debug\netcoreapp2.0\TestGeneratorv1.runtimeconfig.dev.json
+C:\Users\User\source\repos\TestGeneratorv1\TestGeneratorv1\bin\Debug\netcoreapp2.0\TestGeneratorv1.dll
+C:\Users\User\source\repos\TestGeneratorv1\TestGeneratorv1\bin\Debug\netcoreapp2.0\TestGeneratorv1.pdb
+C:\Users\User\source\repos\TestGeneratorv1\TestGeneratorv1\obj\Debug\netcoreapp2.0\TestGeneratorv1.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\TestGeneratorv1\TestGeneratorv1\obj\Debug\netcoreapp2.0\TestGeneratorv1.AssemblyInfoInputs.cache
+C:\Users\User\source\repos\TestGeneratorv1\TestGeneratorv1\obj\Debug\netcoreapp2.0\TestGeneratorv1.AssemblyInfo.cs
+C:\Users\User\source\repos\TestGeneratorv1\TestGeneratorv1\obj\Debug\netcoreapp2.0\TestGeneratorv1.dll
+C:\Users\User\source\repos\TestGeneratorv1\TestGeneratorv1\obj\Debug\netcoreapp2.0\TestGeneratorv1.pdb
+C:\Users\hppc\Desktop\osbPraksa\TestGeneratorv1\bin\Debug\netcoreapp2.0\TestGeneratorv1.deps.json
+C:\Users\hppc\Desktop\osbPraksa\TestGeneratorv1\bin\Debug\netcoreapp2.0\TestGeneratorv1.runtimeconfig.json
+C:\Users\hppc\Desktop\osbPraksa\TestGeneratorv1\bin\Debug\netcoreapp2.0\TestGeneratorv1.runtimeconfig.dev.json
+C:\Users\hppc\Desktop\osbPraksa\TestGeneratorv1\bin\Debug\netcoreapp2.0\TestGeneratorv1.dll
+C:\Users\hppc\Desktop\osbPraksa\TestGeneratorv1\bin\Debug\netcoreapp2.0\TestGeneratorv1.pdb
+C:\Users\hppc\Desktop\osbPraksa\TestGeneratorv1\obj\Debug\netcoreapp2.0\TestGeneratorv1.csprojResolveAssemblyReference.cache
+C:\Users\hppc\Desktop\osbPraksa\TestGeneratorv1\obj\Debug\netcoreapp2.0\TestGeneratorv1.csproj.CoreCompileInputs.cache
+C:\Users\hppc\Desktop\osbPraksa\TestGeneratorv1\obj\Debug\netcoreapp2.0\TestGeneratorv1.AssemblyInfoInputs.cache
+C:\Users\hppc\Desktop\osbPraksa\TestGeneratorv1\obj\Debug\netcoreapp2.0\TestGeneratorv1.AssemblyInfo.cs
+C:\Users\hppc\Desktop\osbPraksa\TestGeneratorv1\obj\Debug\netcoreapp2.0\TestGeneratorv1.dll
+C:\Users\hppc\Desktop\osbPraksa\TestGeneratorv1\obj\Debug\netcoreapp2.0\TestGeneratorv1.pdb
+C:\Users\User\Desktop\OSB praksa\testGenerator\TestGeneratorv1\bin\Debug\netcoreapp2.0\TestGeneratorv1.deps.json
+C:\Users\User\Desktop\OSB praksa\testGenerator\TestGeneratorv1\bin\Debug\netcoreapp2.0\TestGeneratorv1.runtimeconfig.json
+C:\Users\User\Desktop\OSB praksa\testGenerator\TestGeneratorv1\bin\Debug\netcoreapp2.0\TestGeneratorv1.runtimeconfig.dev.json
+C:\Users\User\Desktop\OSB praksa\testGenerator\TestGeneratorv1\bin\Debug\netcoreapp2.0\TestGeneratorv1.dll
+C:\Users\User\Desktop\OSB praksa\testGenerator\TestGeneratorv1\bin\Debug\netcoreapp2.0\TestGeneratorv1.pdb
+C:\Users\User\Desktop\OSB praksa\testGenerator\TestGeneratorv1\obj\Debug\netcoreapp2.0\TestGeneratorv1.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\OSB praksa\testGenerator\TestGeneratorv1\obj\Debug\netcoreapp2.0\TestGeneratorv1.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\OSB praksa\testGenerator\TestGeneratorv1\obj\Debug\netcoreapp2.0\TestGeneratorv1.AssemblyInfo.cs
+C:\Users\User\Desktop\OSB praksa\testGenerator\TestGeneratorv1\obj\Debug\netcoreapp2.0\TestGeneratorv1.dll
+C:\Users\User\Desktop\OSB praksa\testGenerator\TestGeneratorv1\obj\Debug\netcoreapp2.0\TestGeneratorv1.pdb
+C:\Users\User\Desktop\OSB praksa\testGenerator\TestGeneratorv1\obj\Debug\netcoreapp2.0\TestGeneratorv1.csprojAssemblyReference.cache
+C:\Users\hppc\Desktop\osbPraksa\TestGeneratorv1\bin\Debug\netcoreapp2.0\TestGeneratorv1.xml

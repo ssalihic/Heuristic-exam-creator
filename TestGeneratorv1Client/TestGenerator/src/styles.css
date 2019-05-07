@@ -1,0 +1,230 @@
+/* You can add global styles to this file, and also import other style files */
+label{
+    margin-top: 1%;
+    font-size: 18px;
+}
+.margin-numeric {
+    margin-top: 10px;
+}
+
+.border-form {
+    border-radius: 5px;
+    background: #fafafa;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.1);
+}
+
+input.Upload{
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid lightgray;
+    text-align: left;
+    padding: 8px;
+}
+
+
+
+button.addQuestion{
+    width: 64px;
+    height: 64px;
+    background-color:orange;
+    color: #fafafa;
+    border-radius: 50%;
+    box-shadow: 0 8px 24px rgba(255, 165, 0, 0.3);
+    border: none;
+    outline: none;
+    font-size: 32px;
+    color: white;
+    text-align: center;
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+    z-index: 9999;
+    transition: all 0.1s ease-in-out;
+    cursor: pointer;
+}
+
+a:hover {
+    background-color: #043a77;
+}
+html {
+    height: 100%;
+    box-sizing: border-box;
+  }
+  
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
+  
+  body {
+    position: relative;
+    margin: 0;
+    padding-bottom: 6rem;
+    min-height: 100%;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+  }
+  .editQuestion{
+    width: 70px;
+    height: 64px;
+    background-color:#d2ad4b;
+    color: #fafafa;
+    border-radius: 50%;
+    box-shadow: 0 8px 24px rgba(255, 165, 0, 0.3);
+    border: none;
+    outline: none;
+    font-size: 32px;
+    color: white;
+    text-align: center;
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+    z-index: 9999;
+    transition: all 0.1s ease-in-out;
+    cursor: pointer;
+}
+
+.btn:hover{
+    background-color: #ceced6;
+  }
+  .customAlert{
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    color: white;
+    text-align: center;
+    position: fixed;
+    right: 50px;
+    z-index: 9999;
+    transition: all 0.1s ease-in-out;
+    cursor: pointer;
+}
+.loadWrapper {  
+    background: rgba(0,0,0,0.3);  
+    width: 100%;  
+    height: 100%;  
+    position: fixed;  
+    top:0px;  
+    left:0px;  
+    z-index: 99999;  
+}  
+.loader {
+    border: 5px solid #f3f3f3; /* Light grey */
+    border-top: 5px solid #3d3e3f; /* gray */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+input:invalid {
+
+    border-left-color: #a94442;
+    border-left-width: 5px;
+}
+.error{
+    color:#a94442;
+}
+.card-header{
+    background-color: lightgray;
+}
+
+.accordionCustom{
+    background-color: #e3e5e5; 
+    font-style: italic;
+
+}
+.headerCustom{
+    background-color: #002d60;
+     color: white;
+ }
+ .headerPreviewTest{
+     text-align: center; 
+     width: 100%;
+ }
+ .nameSurename{
+     text-align: left;
+     font-size: 12pt; 
+     width: 50%;
+ }
+ .group{
+     text-align: right; 
+     font-size: 12pt; 
+     width: 50%;
+ }
+ .date{
+     text-align: left;
+      font-size: 12pt; 
+      width: 50%;
+ }
+ .testGroup{
+     text-align: right;
+      font-size: 12pt;
+       width: 50%;
+ }
+ .questionNumber{
+     text-align: left; 
+     width: 100%;
+ }
+ .questionPoints{
+ 
+     text-align: end; 
+     width: 100%;
+ }
+ .replaceButton{
+     padding: 0%; 
+     background-color: transparent;
+ }
+ 
+ .deleteButton{
+     color:#b06464; 
+     padding: 0%; 
+     background-color: transparent;
+ }
+ 
+ .textQuestion{
+    width: 90%;
+ word-wrap: break-word;
+}
+.questionAnswer{
+    text-align: left; 
+    width: 100%;
+}
+.testNote{
+    text-align: center; 
+    font-size: 16pt; 
+    width: 100%;
+}
+.questionTextShow{
+    width: 90%;
+    word-wrap: break-word;
+  }
+  .home{
+    font-size: 25px;
+    font-family: 'Courier New';
+}
+.modal-title{
+    text-align: center;
+    width: 100%;
+    font-size: 20pt;
+}
+
+button.addQuestion:disabled{
+    background-color:rgb(236, 210, 160);
+}

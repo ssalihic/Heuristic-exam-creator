@@ -1,0 +1,105 @@
+<app-header></app-header>
+
+<div class="container-fluid">
+  <div class="col-3 offset-9 mt-5">
+    <div class="customAlert">
+      <ngb-alert *ngIf="successMessage" [type]="alertType" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+
+    </div>
+  </div>
+  <div class="row mt-5">
+
+    <form class="col-5 offset-1 border-form" [formGroup]="questionForm">
+      <button class="addQuestion" (click)="addQuestionButton()" [disabled]="!questionForm.valid"><svg style="width:24px;height:24px"
+          viewBox="0 0 24 24">
+          <path fill="#ffffff" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+        </svg></button>
+
+      <div class="row">
+        <div class="form-group col-6">
+          <label for="questionType" i18n>Question type</label>
+          <select class="form-control" id="questionType" (change)="onChangeQuestionType($event.target.value)">
+            <option *ngFor="let item of questionTypes; let i = index" [value]="i">{{item.quesstionTypeName}}</option>
+          </select>
+        </div>
+
+        <div class="form-group col-6">
+          <label for="numPoints" i18n>Number of points</label>
+          <input formControlName="points" min="0" id="numPoints" type="number" name="points" class="form-control" required minlength="2"
+            [(ngModel)]="question.points" required>
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="form-group col-6">
+          <label for="diffLevel" i18n>Difficulty level</label>
+          <select class="form-control" id="diffLevel" (change)="onChangeDifficultyLevel($event.target.value)">
+            <option *ngFor="let item of difficultyLevels; let i = index" [value]="i">{{item.level}}</option>
+          </select>
+        </div>
+
+        <div class="form-group col-6">
+          <label for="questStatus" i18n>Status</label>
+          <select class="form-control" id="questStatus" (change)="onChangeStatus($event.target.value)">
+            <option *ngFor="let item of statuses; let i = index" [value]="i">{{item.statusName}}</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-12 text-center pb-3">
+          <label i18n>Visibility</label>
+        </div>
+        <div class="form-group col-12 text-center">
+          <app-visibility [(visibility)]='visibility'></app-visibility>
+        </div>
+
+      </div>
+
+    </form>
+    <div class="col-4 offset-1 border-form">
+      <app-subject [(subject)]='subject'></app-subject>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row mt-5">
+    <form class="col-10 offset-1 border-form">
+      <div class="row">
+        <div class="form-group col-9">
+          <label class="d1" i18n>Question text</label>
+          <app-ngx-editor class="editor" height="300px" [(ngModel)]="question.questionText" [ngModelOptions]="{standalone: true}">
+          </app-ngx-editor>
+        </div>
+        <div class="form-group col-2">
+          <input class="Upload" type='file' (change)="onSelectQuestionImage($event)" accept=".png, .jpg, .jpeg">
+          <img [src]="urlQuestion" height="80%" width="150%">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row mt-5 mb-5">
+    <form class="col-10 offset-1 border-form">
+      <div class="row">
+        <div class="form-group col-9">
+          <label class="d1"i18n> Question answer</label>
+          <app-ngx-editor class="editor" height="300px" [(ngModel)]="question.answer.answerText"
+            [ngModelOptions]="{standalone: true}"> </app-ngx-editor>
+        </div>
+        <div class="form-group col-2">
+          <input class="Upload" type='file' (change)="onSelectAnswerImage($event)" accept=".png, .jpg, .jpeg">
+          <img [src]="urlAnswer" height="80%" width="150%">
+
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>
+<app-footer></app-footer>

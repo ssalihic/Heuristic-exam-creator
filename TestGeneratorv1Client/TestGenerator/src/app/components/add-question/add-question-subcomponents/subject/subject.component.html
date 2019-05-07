@@ -1,0 +1,29 @@
+<form>
+  <div class="row">
+    <div class="form-group col-12">
+      <label for="questionSubject" i18n>Subject</label>
+      <select class="form-control" id="questionSubject" (change)="onChangeSubject($event.target.value)">
+        <option *ngFor="let item of subjects; let i = index" [value]="i">{{item.subjectName}}</option>
+      </select>
+    </div>
+
+
+    <div class="form-group col-12">
+
+      <label for="studyYear" i18n>Year of study</label>
+      <select class="form-control" id="studyYear" (change)="onChangeYearOfStudy($event.target.value)">
+        <option *ngFor="let item of yearOfStudies; let i = index" [value]="i">{{item.yearOfStudyName}}</option>
+      </select>
+
+
+    </div>
+    <div class="form-group col-12">
+
+      <label for="questionArea" i18n>Area</label>
+      <select class="form-control" id="questionArea" (change)="onChangeArea($event.target.value)">
+        <option *ngFor="let item of areas; let i = index" [value]="i">{{item.areaName}}</option>
+      </select>
+    </div>
+
+  </div>
+</form>
